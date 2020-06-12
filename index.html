@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=UTF-8 />
+</head>
+<style>
+    body {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        background: hsl(0, 0%, 10%);
+    }
+</style>
+
+<body>
+
+    <script src="three.min.js"></script>
+    <script src="GLTFLoader.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script>
+
+        let scene, camera, renderer;
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x800080);
+
+            //camera = new THREE.PerspectiveCamera(7, window.innerWidth / window.innerHeight, 1, 400);
+            var camera = new THREE.PerspectiveCamera( 2, window.innerWidth / window.innerHeight, 1, 400 );
+            //camera.rotation.y = 45 / 180 * Math.PI;
+
+
+            camera.position.x = 70;
+            camera.position.y = 0;
+            camera.position.z = 20;
+
+
+            controls = new THREE.OrbitControls(camera);
+            controls.addEventListener('change', renderer);
+
+            hlight = new THREE.AmbientLight(0x404040, 4);
+            scene.add(hlight);
+
+            directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(4.07625, 1.00545, 5.90386);
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+
+            light = new THREE.PointLight(0xc4c4c4, 10);
+            light.position.set(4.07625, 1.00545, 5.90386);
+            scene.add(light);
+
+            light2 = new THREE.PointLight(0xc4c4c4, 10);
+            light2.position.set(500, 100, 0);
+            scene.add(light2);
+
+            light3 = new THREE.PointLight(0xc4c4c4, 10);
+            light3.position.set(0, 100, -500);
+            scene.add(light3);
+
+            light4 = new THREE.PointLight(0xc4c4c4, 10);
+            light4.position.set(-500, 300, 500);
+            scene.add(light4);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            document.body.appendChild(renderer.domElement);
+
+            var animate = function () {
+                requestAnimationFrame(animate);
+
+                renderer.render(scene, camera);
+
+            }
+
+            animate();
+
+            let loader = new THREE.GLTFLoader();
+            loader.load('alma2.glb', function (glb) {
+
+                var parser = glb.parser;
+                console.log(parser.json.materials);
+
+                material = new THREE.MeshBasicMaterial({
+                    //color: 0x6666,
+                });
+
+                //mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(1, 1, 20), material);
+
+                //gltf = new THREE.MeshStandardMaterial();
+
+                //table = glb.scene.children[2];
+                //table.scale.set(1, 0.5, 0.5);
+                //table.material = 0x6666;
+
+                scene.add(glb.scene);
+                //scene.add(mesh);
+
+                animate();
+
+            });
+
+
+        }
+
+
+        init();
+
+
+    </script>
+</body>
+
+</html>
