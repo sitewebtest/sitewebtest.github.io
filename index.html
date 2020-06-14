@@ -26,46 +26,58 @@
             scene.background = new THREE.Color(0x800080);
 
             //camera = new THREE.PerspectiveCamera(7, window.innerWidth / window.innerHeight, 1, 400);
-            var camera = new THREE.PerspectiveCamera( 2, window.innerWidth / window.innerHeight, 1, 400 );
+            var camera = new THREE.PerspectiveCamera(3, window.innerWidth / window.innerHeight, 1, 1000);
             //camera.rotation.y = 45 / 180 * Math.PI;
 
 
             camera.position.x = 70;
             camera.position.y = 0;
-            camera.position.z = 20;
+            camera.position.z = 0;
+
 
 
             controls = new THREE.OrbitControls(camera);
             controls.addEventListener('change', renderer);
 
-            hlight = new THREE.AmbientLight(0x404040, 4);
-            scene.add(hlight);
+            //hlight = new THREE.AmbientLight(0x404040, 5);
+            //scene.add(hlight);
 
-            directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-            directionalLight.position.set(4.07625, 1.00545, 5.90386);
-            directionalLight.castShadow = true;
-            scene.add(directionalLight);
+            //scene.add(new THREE.HemisphereLight(0xffffff, 0x000000, 5));
 
-            light = new THREE.PointLight(0xc4c4c4, 10);
-            light.position.set(4.07625, 1.00545, 5.90386);
+            //dirLight = new THREE.DirectionalLight(0xffffff, 1);
+            //dirLight.position.set(5, 2, 8);
+            //scene.add(dirLight);
+
+            var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
             scene.add(light);
 
-            light2 = new THREE.PointLight(0xc4c4c4, 10);
-            light2.position.set(500, 100, 0);
-            scene.add(light2);
 
-            light3 = new THREE.PointLight(0xc4c4c4, 10);
-            light3.position.set(0, 100, -500);
-            scene.add(light3);
+            //directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            //directionalLight.position.set(4.07625, 1.00545, 5.90386);
+            //directionalLight.castShadow = true;
+            //scene.add(directionalLight);
 
-            light4 = new THREE.PointLight(0xc4c4c4, 10);
-            light4.position.set(-500, 300, 500);
-            scene.add(light4);
+            //light = new THREE.PointLight(0xc4c4c4, 10);
+            //light.position.set(4.07625, 1.00545, 5.90386);
+            //scene.add(light);
+
+            //light2 = new THREE.PointLight(0xc4c4c4, 10);
+            //light2.position.set(500, 100, 0);
+            //scene.add(light2);
+
+            //light3 = new THREE.PointLight(0xc4c4c4, 10);
+            //light3.position.set(0, 100, -500);
+            //scene.add(light3);
+
+            //light4 = new THREE.PointLight(0xc4c4c4, 10);
+            //light4.position.set(-500, 300, 500);
+            //scene.add(light4);
 
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
 
             document.body.appendChild(renderer.domElement);
+
 
             var animate = function () {
                 requestAnimationFrame(animate);
@@ -77,14 +89,14 @@
             animate();
 
             let loader = new THREE.GLTFLoader();
-            loader.load('https://drive.google.com/file/d/1B82W_XZWJXO3Ev5fEsBaHGtC90FQMAT0/alma2.glb', function (glb) {
+            loader.load('alma2.glb', function (glb) {
 
-                var parser = glb.parser;
-                console.log(parser.json.materials);
+                //var parser = glb.parser;
+                //console.log(parser.json.materials);
 
-                material = new THREE.MeshBasicMaterial({
-                    //color: 0x6666,
-                });
+                //material = new THREE.MeshBasicMaterial({
+                //color: 0x6666,
+                //});
 
                 //mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(1, 1, 20), material);
 
